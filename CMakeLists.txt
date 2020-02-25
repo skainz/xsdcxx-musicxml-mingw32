@@ -19,9 +19,9 @@ target_link_libraries(xsdbin ${XercesC_LIBRARY})
 add_custom_command(
   OUTPUT ${PROJECT_BINARY_DIR}/musicxml-schema.cpp
          ${PROJECT_BINARY_DIR}/musicxml-schema.hpp
-  COMMAND xsdbin --cxx-suffix -schema.cpp --hxx-suffix -schema.hpp
-                 --output-dir ${PROJECT_BINARY_DIR}
-                 ${PROJECT_SOURCE_DIR}/musicxml.xsd
+  COMMAND wine xsdbin.exe --cxx-suffix -schema.cpp --hxx-suffix -schema.hpp
+                 --output-dir .
+                 musicxml.xsd
   DEPENDS ${PROJECT_SOURCE_DIR}/musicxml.xsd
 )
 
@@ -31,7 +31,7 @@ target_compile_features(dtdbin PRIVATE cxx_generalized_initializers)
 add_custom_command(
   OUTPUT ${PROJECT_BINARY_DIR}/musicxml-dtd.cpp
          ${PROJECT_BINARY_DIR}/musicxml-dtd.hpp
-  COMMAND dtdbin ${PROJECT_SOURCE_DIR}/dtd/
+  COMMAND wine dtdbin.exe ${PROJECT_SOURCE_DIR}/dtd/
 )
 
 set(XSDCXX_FLAGS cxx-tree
